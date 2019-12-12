@@ -1,3 +1,5 @@
+import { ADD_ITEM, REMOVE_ITEM, UPDATE_TOTAL } from '../Actions/FeatureActions';
+
 export const initialState = {
     additionalPrice: 0,
     car: {
@@ -20,31 +22,27 @@ export const initialState = {
           case "ADD_ITEM":
               return {
                   ...state,
-                  additionalPrice: action.payload.price + state.additionalPrice,
                   car:{
                   ...state.car, 
-                  features: [...state.car.features, action.payload],
-                  price: state.car.price + action.payload.price
-              },
-              additionalFeatures: state.additionalFeatures.filter( el => {
-                  return el.id !== action.payload.id;
-              })
-            }
+                  features: state.car.features.includes(action.payload) ? [...state.car.features] : [...state.car.features, action.payload]  
+              }            
+            };
             case "REMOVE_ITEM":
                 return{
                     ...state,
-                    additionalPrice: state.additionalPrice - action.payload.price,
                     car: {
                         ...state.car, 
-                        features: state.car.features.filter(el => {
-                            return el.id !== action.payload.id;
-                        }),
-                        price: state.car.price - action.payload.price
-                    },
-                    additionalFeatures: [...state.additionalFeatures, action.payload]
-                }
+                        features: state.car.features.filter((car) => car.id !== action.payload.id)
+                    }
+                };
+
+            case "UPDATE_TOTAL":
+                return {
+                    ...state,
+                    additionalPrice: state.additionalPrice + action.payload
+                };
                 default:
                     return state;
             }
 
-  }
+  };
