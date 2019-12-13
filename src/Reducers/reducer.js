@@ -21,7 +21,8 @@ export const initialState = {
       switch(action.type){
           case "ADD_ITEM":
               return {
-                  ...state,
+                  ...state, 
+                //   additionalPrice: state.additionalPrice + action.payload,
                   car:{
                   ...state.car, 
                   features: state.car.features.includes(action.payload) ? [...state.car.features] : [...state.car.features, action.payload]  
@@ -30,6 +31,7 @@ export const initialState = {
             case "REMOVE_ITEM":
                 return{
                     ...state,
+                    // additionalPrice: state.additionalPrice - action.payload,
                     car: {
                         ...state.car, 
                         features: state.car.features.filter((car) => car.id !== action.payload.id)

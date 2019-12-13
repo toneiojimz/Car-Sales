@@ -15,7 +15,7 @@ const App = (props) => {
   const removeFeature = item => {
     // dispatch an action here to remove an item
     props.removeFeature(item);
-    props.updateTotal(item.price);
+    props.updateTotal(-item.price);
   };
 
   const buyItem = item => {
